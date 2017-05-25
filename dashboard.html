@@ -13,17 +13,25 @@
 		<!-- REPLACE AppKey WITH YOUR APPLICATION KEY -->
 		<script src="https://api.trello.com/1/client.js?key=3fbdff09517101c9882c451b190b04f5"></script>
 		<script type="text/javascript">
+		var loadedBoards = function (boards) {
+			$.each(boards, function (index, value) {
+				$('#boards').append($("<option></option>").attr("value", value.id).text(value.name));
+			});
+		};
+		var loadBoards = function () { //Get the users boards
+		Trello.get('/members/me/boards/', loadedBoards, function () {
+			console.log("Failed to load boards");
+		});
+		};
 		Trello.authorize({
 			type: "popup",
-			name: "Membership dashboard",
+			name: "Trello dashboard",
 			scope: {
 				read: true,
 				write: false
 			},
 			expiration: "never",
-			success: function () {
-				console.log("Successful authentication");
-			},
+			success: loadBoards,
 			error: function () {
 				console.log("Failed authentication");
 			}
