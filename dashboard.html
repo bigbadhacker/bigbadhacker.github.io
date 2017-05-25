@@ -14,6 +14,7 @@
 		<script src="https://api.trello.com/1/client.js?key=3fbdff09517101c9882c451b190b04f5"></script>
 		<script type="text/javascript">
 		var loadedBoards = function(boards) {
+			console.log(boards);
 			$.each(boards, function(index, value) {
 				$('#boards')
 				.append($("<option></option>")
@@ -32,7 +33,7 @@
 		};
 
 		Trello.authorize({
-			type: "popup",
+			type: "redirect",
 			name: "Membership dashboard",
 			scope: {
 				read: true,
