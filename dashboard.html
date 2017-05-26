@@ -63,7 +63,7 @@
 	var loadMembers = function(members, boardId) {
       $.each(members, function(index, member) {
 		Trello.get(
-		  '/1/members/' + member.id + '/avatarSource',
+		  '/members/' + member.id + '/avatarSource',
 		  function(value) { console.log(value); },
 		  function() { console.log("Failed to load avatarSource"); }
 		);
@@ -75,7 +75,7 @@
       $('#members').empty();
       
       Trello.get(
-		'/1/boards/' + boardId + '/members',
+		'/boards/' + boardId + '/members',
 		function(members) { loadMembers(members, boardId); },
         function() { console.log("Failed to load members"); }
       );
