@@ -65,11 +65,11 @@
 		Trello.get(
 		  '/members/' + member.id + '/avatarHash',
 		  function(avatarHash) {
-			  console.log(avatarHash);
+			  console.log(avatarHash._value);
 			  $('#members')
               .append($("<img>")
 			  .addClass("profile-image-image")
-              .attr("src","https://trello-avatars.s3.amazonaws.com/" + avatarHash + "/170.png"));
+              .attr("src","https://trello-avatars.s3.amazonaws.com/" + avatarHash._value + "/170.png"));
 		  },
 		  function() { console.log("Failed to load avatarSource"); }
 		);
