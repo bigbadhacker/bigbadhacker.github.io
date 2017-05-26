@@ -79,7 +79,7 @@
 		
 		//$("#cards > #member-" + card.members);
 		
-		$.each(members, function(index, member) {
+		$.each(card.members, function(index, member) {
 			var cardMember = $("<div>").addClass("member").addClass("js-member-on-card-menu");
 			if (member.avatarHash) {
 				var memberAvatar = $("<img>")
