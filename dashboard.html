@@ -67,6 +67,7 @@
 	  console.log(cards);
       $.each(cards, function(index, card) {
 	  
+		var listCard = $("<div>").addClass("list-card");
 		var cardDetails = $("<div>").addClass("list-card-details");
 		var cardLabel = $("<div>").addClass("list-card-labels").addClass("js-card-labels");
 		//<span class="card-label card-label-blue mod-card-front" title="New Promo">New Promo</span>
@@ -104,7 +105,8 @@
 				memberLane.append(cardMember);
 			}
 			
-			memberLane.append(cardDetails);
+			listCard.append(cardDetails);
+			memberLane.append(listCard);
 		});
       });
     };
