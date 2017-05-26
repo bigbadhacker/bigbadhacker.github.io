@@ -16,7 +16,7 @@
       
       <div id="labels"></div>
 	  
-	  <div id="members"></div>
+	  <div id="cards"></div>
 	  
     </div> 
   </body>
@@ -60,30 +60,55 @@
       );
     });
 	
-	var loadMembers = function(members, boardId) {
-      $.each(members, function(index, member) {
-		Trello.get(
-		  '/members/' + member.id + '/avatarHash',
-		  function(avatarHash) {
-			  console.log(avatarHash._value);
-			  $('#members')
-              .append($("<img>")
-			  .addClass("profile-image-image")
-              .attr("src","https://trello-avatars.s3.amazonaws.com/" + avatarHash._value + "/170.png"));
-		  },
-		  function() { console.log("Failed to load avatarSource"); }
-		);
+	// Mine
+	
+	var loadedCards = function(cards) {
+      $.each(cards, function(index, card) {
+		var cardDetails = $("<div>").addClass("list-card-details");
+		var cardLabel = $("<div>").addClass("list-card-labels").addClass("js-card-labels");
+		//<span class="card-label card-label-blue mod-card-front" title="New Promo">New Promo</span>
+		cardDetails.append(cardLabel);
+		var cardName = $("<a>").addClass("list-card-title").addClass("js-card-name").attr("href", card.shortUrl).text(card.name);
+		cardName.append($("<span>").addClass("card-short-id").addClass("hide").text(card.shortId));
+		cardDetails.append(cardName);
+		var cardMembers = $("<div>").addClass("list-card-members").addClass("js-list-card-members");
+		
+		cardDetails.append(cardMembers);
+		
+		$.each(members, function(index, member) {
+			var cardMember = $("<div>").addClass("member").addClass("js-member-on-card-menu");
+			if (member.avatarHash) {
+				var memberAvatar = $("<img>")
+				                   .addClass("member-avatar")
+								   .attr("height", "30")
+								   .attr("width", "30")
+								   .attr("src", "https://trello-avatars.s3.amazonaws.com/" + member.avatarHash + "/30.png")
+								   .attr("title", member.fullName + " (" + member.username + ")");
+				cardMember.append(memberAvatar);
+				cardMembers.append(cardMember);
+			} else {
+				var memberAvatar = $("<span>")
+				                   .addClass("member-initials")
+								   .attr("title", member.fullName + " (" + member.username + ")")
+								   .text(member.initials);
+				cardMember.append(memberAvatar);
+				cardMembers.append(cardMember);
+			}
+		});
+		
+		$("#cards").append(cardDetails);
       });
     };
 	
 	$('#boards').change(function() {
       var boardId = $("option:selected", this).val();
-      $('#members').empty();
+      $('#labels').empty();
       
       Trello.get(
-		'/boards/' + boardId + '/members',
-		function(members) { loadMembers(members, boardId); },
-        function() { console.log("Failed to load members"); }
+	    '/boards/' + boardId + '/cards',
+		{"members": "true", "member_field": "avatarHash,initials,fullName,username", "fields": "id,name,idShort,shortUrl"},
+        loadedCards,
+        function() { console.log("Failed to load cards"); }
       );
     });
     
