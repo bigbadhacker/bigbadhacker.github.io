@@ -78,7 +78,7 @@
 		
 		$.each(card.members, function(index, member) {
 			
-			var memberLane = $("#cards > #member-" + member.id);
+			var memberLane = $("#cards #member-" + member.id);
 			if (memberLane.length == 0) {
 				memberLane = $('<div/>', {id: "#member-" + member.id}).appendTo("#cards");
 			
