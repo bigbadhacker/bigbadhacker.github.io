@@ -80,8 +80,7 @@
 			
 			var memberLane = $("#cards > #member-" + member.id);
 			if (memberLane.length == 0) {
-				memberLane = $("#member-" + member.id);
-				$("#cards").append(memberLane);
+				memberLane = $('<div/>', {id: "#member-" + member.id}).appendTo("#cards");
 			}
 			
 			var cardMember = $("<div>").addClass("member").addClass("js-member-on-card-menu");
