@@ -77,7 +77,6 @@
       Trello.get(
 		'/1/boards/' + boardId + '/members',
 		function(members) { loadMembers(members, boardId); },
-        loadedMembers,
         function() { console.log("Failed to load members"); }
       );
     });
