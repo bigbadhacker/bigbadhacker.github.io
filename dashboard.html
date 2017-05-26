@@ -63,7 +63,9 @@
 	// Mine
 	
 	var loadedCards = function(cards) {
+	  console.log(cards);
       $.each(cards, function(index, card) {
+	  
 		var cardDetails = $("<div>").addClass("list-card-details");
 		var cardLabel = $("<div>").addClass("list-card-labels").addClass("js-card-labels");
 		//<span class="card-label card-label-blue mod-card-front" title="New Promo">New Promo</span>
@@ -74,6 +76,8 @@
 		var cardMembers = $("<div>").addClass("list-card-members").addClass("js-list-card-members");
 		
 		cardDetails.append(cardMembers);
+		
+		$("#cards > #member-" + card
 		
 		$.each(members, function(index, member) {
 			var cardMember = $("<div>").addClass("member").addClass("js-member-on-card-menu");
