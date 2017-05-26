@@ -81,25 +81,25 @@
 			var memberLane = $("#cards > #member-" + member.id);
 			if (memberLane.length == 0) {
 				memberLane = $('<div/>', {id: "#member-" + member.id}).appendTo("#cards");
-			}
 			
-			var cardMember = $("<div>").addClass("member").addClass("js-member-on-card-menu");
-			if (member.avatarHash) {
-				var memberAvatar = $("<img>")
-				                   .addClass("member-avatar")
-								   .attr("height", "30")
-								   .attr("width", "30")
-								   .attr("src", "https://trello-avatars.s3.amazonaws.com/" + member.avatarHash + "/30.png")
-								   .attr("title", member.fullName + " (" + member.username + ")");
-				cardMember.append(memberAvatar);
-				//cardMembers.append(cardMember);
-			} else {
-				var memberAvatar = $("<span>")
-				                   .addClass("member-initials")
-								   .attr("title", member.fullName + " (" + member.username + ")")
-								   .text(member.initials);
-				cardMember.append(memberAvatar);
-				//cardMembers.append(cardMember);
+				var cardMember = $("<div>").addClass("member").addClass("js-member-on-card-menu");
+				if (member.avatarHash) {
+					var memberAvatar = $("<img>")
+									   .addClass("member-avatar")
+									   .attr("height", "30")
+									   .attr("width", "30")
+									   .attr("src", "https://trello-avatars.s3.amazonaws.com/" + member.avatarHash + "/30.png")
+									   .attr("title", member.fullName + " (" + member.username + ")");
+					cardMember.append(memberAvatar);
+					//cardMembers.append(cardMember);
+				} else {
+					var memberAvatar = $("<span>")
+									   .addClass("member-initials")
+									   .attr("title", member.fullName + " (" + member.username + ")")
+									   .text(member.initials);
+					cardMember.append(memberAvatar);
+					//cardMembers.append(cardMember);
+				}
 			}
 			
 			memberLane.append(cardDetails);
