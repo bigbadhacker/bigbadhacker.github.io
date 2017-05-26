@@ -73,13 +73,17 @@
 		var cardName = $("<a>").addClass("list-card-title").addClass("js-card-name").attr("href", card.shortUrl).text(card.name);
 		cardName.append($("<span>").addClass("card-short-id").addClass("hide").text(card.shortId));
 		cardDetails.append(cardName);
-		var cardMembers = $("<div>").addClass("list-card-members").addClass("js-list-card-members");
-		
-		cardDetails.append(cardMembers);
-		
-		//$("#cards > #member-" + card.members);
+		//var cardMembers = $("<div>").addClass("list-card-members").addClass("js-list-card-members");
+		//cardDetails.append(cardMembers);
 		
 		$.each(card.members, function(index, member) {
+			
+			var memberLane = $("#cards > #member-" + member.id);
+			if (memberLane.length == 0) {
+				memberLane = $("#member-" + member.id")
+				$("#cards").append(memberLane);
+			}
+			
 			var cardMember = $("<div>").addClass("member").addClass("js-member-on-card-menu");
 			if (member.avatarHash) {
 				var memberAvatar = $("<img>")
@@ -89,18 +93,18 @@
 								   .attr("src", "https://trello-avatars.s3.amazonaws.com/" + member.avatarHash + "/30.png")
 								   .attr("title", member.fullName + " (" + member.username + ")");
 				cardMember.append(memberAvatar);
-				cardMembers.append(cardMember);
+				//cardMembers.append(cardMember);
 			} else {
 				var memberAvatar = $("<span>")
 				                   .addClass("member-initials")
 								   .attr("title", member.fullName + " (" + member.username + ")")
 								   .text(member.initials);
 				cardMember.append(memberAvatar);
-				cardMembers.append(cardMember);
+				//cardMembers.append(cardMember);
 			}
+			
+			memberLane.append(cardDetails);
 		});
-		
-		$("#cards").append(cardDetails);
       });
     };
 	
