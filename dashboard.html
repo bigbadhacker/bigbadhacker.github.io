@@ -30,7 +30,7 @@
         $('#boards')
           .append($("<option></option>")
           .attr("value",value.id)
-          .text(value.name)); 
+          .text(value.name));
       });
     };
     var loadBoards = function() {
@@ -63,8 +63,14 @@
 	var loadMembers = function(members, boardId) {
       $.each(members, function(index, member) {
 		Trello.get(
-		  '/members/' + member.id + '/avatarSource',
-		  function(value) { console.log(value); },
+		  '/members/' + member.id + '/avatarHash',
+		  function(avatarHash) {
+			  console.log(avatarHash);
+			  $('#members')
+              .append($("<img>")
+			  .addClass("profile-image-image")
+              .attr("src","https://trello-avatars.s3.amazonaws.com/" + avatarHash + "/170.png");
+		  },
 		  function() { console.log("Failed to load avatarSource"); }
 		);
       });
